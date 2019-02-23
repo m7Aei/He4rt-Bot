@@ -1,16 +1,6 @@
 const Discord = require('discord.js');
 const Canvas = require('canvas');
 const snekfetch = require('snekfetch');
-const Twit = require('twit');
-
-var T = new Twit({
-  consumer_key:         process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret:      process.env.TWITTER_CONSUMER_SECRET,
-  access_token:         process.env.TWITTER_ACCESS_TOKEN,
-  access_token_secret:  process.env.TWITTER_ACCESS_TOKEN_SECRET,
-  timeout_ms:           60*1000,
-  strictSSL:            true,     
-})
 
 module.exports = async (client, member) => {
 
@@ -45,7 +35,7 @@ module.exports = async (client, member) => {
   	const avatar = await Canvas.loadImage(buffer);
   	ctx.drawImage(avatar, 25, 25, 200, 200);
 
-  	const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-user.png');
+		const attachment = new Discord.Attachment(canvas.toBuffer(), 'welcome-user.png');
     member.addRole(member.guild.roles.find("name", "👥 Membros"));
   	client.channels.get(process.env.WELCOME_CHAT).send(`<:he4rt:546395281093034015> | ${member}`, attachment);
 }
