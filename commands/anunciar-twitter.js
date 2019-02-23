@@ -15,7 +15,7 @@ var T = new Twit({
 })
 */
 
-const host = "http://danielgreis.me:8000/users?"
+const host = process.env.END_POINT_CREATE;
 
 module.exports = {
     run: (client, message, args) => {
