@@ -4,7 +4,7 @@ const snekfetch = require('snekfetch');
 const Twit = require('twit');
 const request = require('request');
 
-/*
+
 var T = new Twit({
     consumer_key:         process.env.TWITTER_CONSUMER_KEY,
     consumer_secret:      process.env.TWITTER_CONSUMER_SECRET,
@@ -13,7 +13,7 @@ var T = new Twit({
     timeout_ms:           60*1000,
     strictSSL:            true,
 })
-*/
+
 
 const host = process.env.END_POINT_CREATE;
 
@@ -27,9 +27,11 @@ request(`${host}${Day}`, (err, res, body) => {
     info['data'].forEach(element => {
         id_users.push(element['discord_id'])
     });
-            console.log(id_users)
-            var name = client.guilds.get(process.env.GUILD_ID).members.get(id_users[1]);
-            console.log(`${name.displayName}`)
+            var name;
+            id_users.forEach(element => {
+               name = client.guilds.get(process.env.GUILD_ID).members.get(element)
+               T.post('statuses/update', { status: `Bem vindo ${name}` }, function(err, data, response) {})
+            });
             })
         },
 
